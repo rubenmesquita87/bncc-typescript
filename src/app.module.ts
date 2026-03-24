@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
 import { DatabaseModule } from './database/database.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -32,7 +31,6 @@ import { Cursos } from './database/entities/cursos.entity';
 import { DireitosAprendizagem } from './database/entities/direitos-aprendizagem.entity';
 import { Etapas } from './database/entities/etapas.entity';
 import { Usuarios } from './database/entities/usuarios.entity';
-import { JwtGuard } from './auth/jwt.guard';
 
 @Module({
   imports: [
@@ -80,13 +78,7 @@ import { JwtGuard } from './auth/jwt.guard';
     UsuariosModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_GUARD,
-      useClass: JwtGuard,
-    },
-  ],
+  providers: [AppService],
   exports: [AppService],
 })
 export class AppModule {}
