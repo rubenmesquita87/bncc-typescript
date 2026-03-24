@@ -30,7 +30,7 @@ export class CursosController {
     return this.cursosService.findOne(id_curso);
   }
 
-  @Patch('id_curso')
+  @Patch(':id_curso')
   async update(
     @Param('id_curso') id_curso: number,
     @Body() updateCursosDto: UpdateCursosDto,

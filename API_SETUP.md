@@ -9,7 +9,7 @@
 
 Suas variáveis de ambiente estão configuradas em `.env`:
 ```
-JWT_SECRET=JWT_SECRET=8fK$2pL9@vQ7xZ!mR4tYgcN6uA1bW0eD
+JWT_SECRET=sua-chave-secreta-aqui
 DB_HOST=localhost
 DB_PORT=3306
 DB_USERNAME=root

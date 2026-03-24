@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
 import { JwtGuard } from './jwt.guard';
 import { AuthUser } from './auth-user.decorator';
+import { Public } from './auth-public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -16,21 +17,25 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @Public()
   async login(@Body() { email, senha }: AuthLoginDto) {
     return await this.authService.login(email, senha);
   }
 
   @Post('register')
+  @Public()
   async register(@Body() body: AuthRegisterDto) {
     return await this.authService.register(body);
   }
 
   @Post('forget')
+  @Public()
   async forget(@Body() { email }: AuthForgetDto) {
     return await this.authService.forget(email);
   }
 
   @Post('reset')
+  @Public()
   async reset(@Body() { senha, token }: AuthResetDto) {
     return await this.authService.reset(senha, token);
   }
