@@ -1,7 +1,7 @@
 {
   "info": {
     "_postman_id": "bncc-api-complete-collection",
-    "name": "BNCC API Completa - NestJS (Privada)",
+    "name": "BNCC-TYPESCRIPT",
     "description": "Collection completa da API BNCC com todas as rotas e autenticação JWT obrigatória (exceto auth)",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
