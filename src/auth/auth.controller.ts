@@ -1,10 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { AuthRegisterDto } from './dto/auth-register.dto';
 import { AuthForgetDto } from './dto/auth-forget.dto';
 import { AuthResetDto } from './dto/auth-reset.dto';
 import { AuthService } from './auth.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
+import { JwtGuard } from './jwt.guard';
+import { AuthUser } from './auth-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -12,6 +14,7 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly usuariosService: UsuariosService,
   ) {}
+
   @Post('login')
   async login(@Body() { email, senha }: AuthLoginDto) {
     return await this.authService.login(email, senha);
@@ -32,9 +35,9 @@ export class AuthController {
     return await this.authService.reset(senha, token);
   }
 
-  @Post('me')
-  async me(@Body() body) {
-    return await this.authService.checkToken(body.token);
+  @Get('me')
+  @UseGuards(JwtGuard)
+  async me(@AuthUser() user: any) {
+    return user;
   }
 }
-

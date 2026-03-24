@@ -1,0 +1,1194 @@
+{
+  "info": {
+    "_postman_id": "bncc-api-complete-collection",
+    "name": "BNCC API Completa - NestJS",
+    "description": "Collection completa da API BNCC com todas as rotas e autenticação JWT",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Autenticação",
+      "item": [
+        {
+          "name": "Registrar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_usuario\": 1,\n  \"usuario\": \"admin\",\n  \"email\": \"admin@bncc.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/register",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@bncc.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Esqueci Senha",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@bncc.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/forget",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "forget"]
+            }
+          }
+        },
+        {
+          "name": "Resetar Senha",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senha\": \"nova_senha123\",\n  \"token\": \"token_reset\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/reset",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "reset"]
+            }
+          }
+        },
+        {
+          "name": "Dados do Usuário (Protegido)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "me"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "👥 Usuários",
+      "item": [
+        {
+          "name": "Listar Todos Usuários",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Obter Usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_usuario\": 2,\n  \"usuario\": \"professor\",\n  \"email\": \"professor@escola.com\",\n  \"senha\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Usuário",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usuario\": \"professor_atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/usuarios/2",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "2"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/2",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "2"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📚 Cursos",
+      "item": [
+        {
+          "name": "Listar Todos Cursos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/cursos",
+              "host": ["{{base_url}}"],
+              "path": ["cursos"]
+            }
+          }
+        },
+        {
+          "name": "Obter Curso por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/cursos/1",
+              "host": ["{{base_url}}"],
+              "path": ["cursos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Curso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_curso\": 1,\n  \"nome\": \"Ensino Fundamental\",\n  \"codigo_censo\": \"EF01\",\n  \"idade_regular\": \"6-10 anos\",\n  \"acronimo\": \"EF\",\n  \"tem_retencao\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/cursos",
+              "host": ["{{base_url}}"],
+              "path": ["cursos"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Curso",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ensino Fundamental Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/cursos/1",
+              "host": ["{{base_url}}"],
+              "path": ["cursos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Curso",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/cursos/1",
+              "host": ["{{base_url}}"],
+              "path": ["cursos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🧩 Componentes",
+      "item": [
+        {
+          "name": "Listar Todos Componentes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/componentes",
+              "host": ["{{base_url}}"],
+              "path": ["componentes"]
+            }
+          }
+        },
+        {
+          "name": "Obter Componente por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/componentes/1",
+              "host": ["{{base_url}}"],
+              "path": ["componentes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Componente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_componente\": 1,\n  \"nome\": \"Língua Portuguesa\",\n  \"codigo_censo\": \"LP01\",\n  \"serie\": \"1ª Série\",\n  \"carga_horaria\": 120\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/componentes",
+              "host": ["{{base_url}}"],
+              "path": ["componentes"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Componente",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Língua Portuguesa Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/componentes/1",
+              "host": ["{{base_url}}"],
+              "path": ["componentes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Componente",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/componentes/1",
+              "host": ["{{base_url}}"],
+              "path": ["componentes", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📈 Etapas",
+      "item": [
+        {
+          "name": "Listar Todas Etapas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/etapas",
+              "host": ["{{base_url}}"],
+              "path": ["etapas"]
+            }
+          }
+        },
+        {
+          "name": "Obter Etapa por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/etapas/1",
+              "host": ["{{base_url}}"],
+              "path": ["etapas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Etapa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_etapa\": 1,\n  \"nome\": \"Educação Infantil\",\n  \"codigo_censo\": \"EI\",\n  \"idade_regular\": \"0-5 anos\",\n  \"duracao\": 5\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/etapas",
+              "host": ["{{base_url}}"],
+              "path": ["etapas"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Etapa",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Educação Infantil Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/etapas/1",
+              "host": ["{{base_url}}"],
+              "path": ["etapas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Etapa",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/etapas/1",
+              "host": ["{{base_url}}"],
+              "path": ["etapas", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎯 Área de Conhecimentos",
+      "item": [
+        {
+          "name": "Listar Todas Áreas",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/area-conhecimentos",
+              "host": ["{{base_url}}"],
+              "path": ["area-conhecimentos"]
+            }
+          }
+        },
+        {
+          "name": "Obter Área por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/area-conhecimentos/1",
+              "host": ["{{base_url}}"],
+              "path": ["area-conhecimentos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Área de Conhecimento",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_areaconhecimento\": 1,\n  \"nome\": \"Ciências da Natureza\",\n  \"codigo_censo\": \"CN\",\n  \"descricao\": \"Área de conhecimento das ciências naturais\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/area-conhecimentos",
+              "host": ["{{base_url}}"],
+              "path": ["area-conhecimentos"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Área",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ciências da Natureza Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/area-conhecimentos/1",
+              "host": ["{{base_url}}"],
+              "path": ["area-conhecimentos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Área",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/area-conhecimentos/1",
+              "host": ["{{base_url}}"],
+              "path": ["area-conhecimentos", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌍 Campos de Experiência",
+      "item": [
+        {
+          "name": "Listar Todos Campos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/campos-experiencia",
+              "host": ["{{base_url}}"],
+              "path": ["campos-experiencia"]
+            }
+          }
+        },
+        {
+          "name": "Obter Campo por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/campos-experiencia/1",
+              "host": ["{{base_url}}"],
+              "path": ["campos-experiencia", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Campo de Experiência",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_campoexperiencia\": 1,\n  \"nome\": \"O eu, o outro e o nós\",\n  \"codigo_censo\": \"CEO\",\n  \"descricao\": \"Campo de experiência relacionado às relações interpessoais\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/campos-experiencia",
+              "host": ["{{base_url}}"],
+              "path": ["campos-experiencia"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Campo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Campo Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/campos-experiencia/1",
+              "host": ["{{base_url}}"],
+              "path": ["campos-experiencia", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Campo",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/campos-experiencia/1",
+              "host": ["{{base_url}}"],
+              "path": ["campos-experiencia", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "⚖️ Direitos de Aprendizagem",
+      "item": [
+        {
+          "name": "Listar Todos Direitos",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/direitos-aprendizagem",
+              "host": ["{{base_url}}"],
+              "path": ["direitos-aprendizagem"]
+            }
+          }
+        },
+        {
+          "name": "Obter Direito por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/direitos-aprendizagem/1",
+              "host": ["{{base_url}}"],
+              "path": ["direitos-aprendizagem", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Direito de Aprendizagem",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_direitoaprendizagem\": 1,\n  \"nome\": \"Direito à Educação\",\n  \"codigo_censo\": \"DEA\",\n  \"descricao\": \"Direito fundamental à educação de qualidade\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/direitos-aprendizagem",
+              "host": ["{{base_url}}"],
+              "path": ["direitos-aprendizagem"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Direito",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Direito Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/direitos-aprendizagem/1",
+              "host": ["{{base_url}}"],
+              "path": ["direitos-aprendizagem", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Direito",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/direitos-aprendizagem/1",
+              "host": ["{{base_url}}"],
+              "path": ["direitos-aprendizagem", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎯 Competências Gerais",
+      "item": [
+        {
+          "name": "Listar Todas Competências",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-geral",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-geral"]
+            }
+          }
+        },
+        {
+          "name": "Obter Competência por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-geral/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-geral", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Competência Geral",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_competencia\": 1,\n  \"nome\": \"Pensar criticamente\",\n  \"codigo_censo\": \"CG01\",\n  \"descricao\": \"Competência para pensar de forma crítica e analítica\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-geral",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-geral"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Competência",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Competência Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-geral/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-geral", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Competência",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/competencia-geral/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-geral", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🔧 Competências de Componente",
+      "item": [
+        {
+          "name": "Listar Todas Competências",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-componente",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-componente"]
+            }
+          }
+        },
+        {
+          "name": "Obter Competência por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-componente/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-componente", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Competência de Componente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_competencia\": 1,\n  \"nome\": \"Ler textos diversos\",\n  \"codigo_censo\": \"LP01\",\n  \"descricao\": \"Competência específica de Língua Portuguesa\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-componente",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-componente"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Competência",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Competência Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-componente/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-componente", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Competência",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/competencia-componente/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-componente", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎨 Competências de Área",
+      "item": [
+        {
+          "name": "Listar Todas Competências",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-area",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-area"]
+            }
+          }
+        },
+        {
+          "name": "Obter Competência por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/competencia-area/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-area", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar Competência de Área",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_competencia\": 1,\n  \"nome\": \"Compreender fenômenos naturais\",\n  \"codigo_censo\": \"CN01\",\n  \"descricao\": \"Competência específica de Ciências da Natureza\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-area",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-area"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Competência",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Competência Atualizada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/competencia-area/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-area", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar Competência",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/competencia-area/1",
+              "host": ["{{base_url}}"],
+              "path": ["competencia-area", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📖 BNCC Fundamental",
+      "item": [
+        {
+          "name": "Listar Todos BNCC Fundamental",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-fundamental",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-fundamental"]
+            }
+          }
+        },
+        {
+          "name": "Obter BNCC por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-fundamental/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-fundamental", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar BNCC Fundamental",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_bncc\": 1,\n  \"codigo\": \"EF01LP01\",\n  \"titulo\": \"Ler e compreender textos\",\n  \"descricao\": \"Objetivo de aprendizagem do Ensino Fundamental\",\n  \"ano_faixa\": \"1º ano\",\n  \"componente\": \"Língua Portuguesa\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-fundamental",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-fundamental"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar BNCC",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Título Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-fundamental/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-fundamental", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar BNCC",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/bncc-fundamental/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-fundamental", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "👶 BNCC Infantil",
+      "item": [
+        {
+          "name": "Listar Todos BNCC Infantil",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-infantil",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-infantil"]
+            }
+          }
+        },
+        {
+          "name": "Obter BNCC por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-infantil/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-infantil", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar BNCC Infantil",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_bncc\": 1,\n  \"codigo\": \"EI01CEO1\",\n  \"titulo\": \"Explorar o ambiente\",\n  \"descricao\": \"Objetivo de aprendizagem da Educação Infantil\",\n  \"faixa_etaria\": \"4-5 anos\",\n  \"campo_experiencia\": \"O eu, o outro e o nós\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-infantil",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-infantil"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar BNCC",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Título Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-infantil/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-infantil", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar BNCC",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/bncc-infantil/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-infantil", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🎓 BNCC Médio",
+      "item": [
+        {
+          "name": "Listar Todos BNCC Médio",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-medio",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-medio"]
+            }
+          }
+        },
+        {
+          "name": "Obter BNCC por ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/bncc-medio/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-medio", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar BNCC Médio",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id_bncc\": 1,\n  \"codigo\": \"EM01LP01\",\n  \"titulo\": \"Analisar textos literários\",\n  \"descricao\": \"Objetivo de aprendizagem do Ensino Médio\",\n  \"serie\": \"1ª série\",\n  \"componente\": \"Língua Portuguesa\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-medio",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-medio"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar BNCC",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Título Atualizado\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/bncc-medio/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-medio", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar BNCC",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/bncc-medio/1",
+              "host": ["{{base_url}}"],
+              "path": ["bncc-medio", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
