@@ -60,19 +60,28 @@ export class AuthService {
   }
 
   async login(email: string, senha: string) {
-    console.log(process.env);
-    const usuario = await this.usuariosRepository.findOne({
-      where: {
-        email,
-        senha,
-      },
-    });
+    try {
+      const usuario = await this.usuariosRepository.findOne({
+        where: {
+          email,
+          senha,
+        },
+      });
 
-    if (!usuario) {
-      throw new UnauthorizedException('Email/senha incorretos!');
+      if (!usuario) {
+        console.error(`Usuário não encontrado: ${email}`);
+        throw new UnauthorizedException('Email/senha incorretos!');
+      }
+
+      console.log(`Login bem-sucedido para: ${email}`);
+      return this.createToken(usuario);
+    } catch (error) {
+      if (error instanceof UnauthorizedException) {
+        throw error;
+      }
+      console.error('Erro ao fazer login:', error);
+      throw new UnauthorizedException('Erro ao fazer login');
     }
-
-    return this.createToken(usuario);
   }
 
   async forget(email: string) {

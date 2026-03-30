@@ -5,7 +5,8 @@ import { AuthForgetDto } from './dto/auth-forget.dto';
 import { AuthResetDto } from './dto/auth-reset.dto';
 import { AuthService } from './auth.service';
 import { UsuariosService } from 'src/usuarios/usuarios.service';
-
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from './jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -33,6 +34,7 @@ export class AuthController {
     return await this.authService.reset(senha, token);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('me')
   async me() {
     return await this.usuariosService.findAll();
